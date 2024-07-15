@@ -23,10 +23,10 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Configuration {
 
-    private boolean offlineEnabled = false;
+    private boolean offlineEnabled = true;
     private JavaRuntime javaRuntime;
     private String jvmArgs;
-    private int minMemory = 1024;
+    private int minMemory = 2048;
     private int maxMemory = 0; // Updated in Launcher
     private int permGen = 256;
     private int windowWidth = 854;
