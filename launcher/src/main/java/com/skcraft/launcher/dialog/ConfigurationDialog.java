@@ -30,6 +30,7 @@ import java.util.Arrays;
  */
 public class ConfigurationDialog extends JDialog {
 
+    final String version;
     private final Configuration config;
     private final ObjectSwingMapper mapper;
 
@@ -67,6 +68,7 @@ public class ConfigurationDialog extends JDialog {
     public ConfigurationDialog(Window owner, @NonNull Launcher launcher) {
         super(owner, ModalityType.DOCUMENT_MODAL);
 
+        this.version = launcher.getVersion();
         this.config = launcher.getConfig();
         mapper = new ObjectSwingMapper(config);
 

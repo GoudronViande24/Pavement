@@ -7,6 +7,7 @@
 package com.skcraft.launcher.dialog;
 
 import com.skcraft.launcher.swing.ActionListeners;
+import com.skcraft.launcher.Launcher;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -15,25 +16,23 @@ import java.awt.event.KeyEvent;
 
 public class AboutDialog extends JDialog {
 
-    public AboutDialog(Window parent) {
+    public AboutDialog(ConfigurationDialog parent) {
         super(parent, "About", ModalityType.DOCUMENT_MODAL);
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        initComponents();
+        initComponents(parent.version);
         setResizable(false);
         pack();
         setLocationRelativeTo(parent);
     }
 
-    private void initComponents() {
+    private void initComponents(String version) {
         JPanel container = new JPanel();
         container.setLayout(new MigLayout("insets dialog"));
 
         container.add(new JLabel("<html>Licensed under GNU General Public License, version 3."), "wrap, gapbottom unrel");
-        container.add(new JLabel("<html>You are using SKCraft Launcher, an open-source customizable<br>" +
-                "launcher platform that anyone can use."), "wrap, gapbottom unrel");
-        container.add(new JLabel("<html>SKCraft does not necessarily endorse the version of<br>" +
-                "the launcher that you are using."), "wrap, gapbottom unrel");
+        container.add(new JLabel("<html>You are using Pavement " + version + ", which is a fork of SKCraft Launcher, an open-source<br>" +
+                "customizable launcher platform that anyone can use."), "wrap, gapbottom unrel");
 
         JButton okButton = new JButton("OK");
         JButton sourceCodeButton = new JButton("Website");
@@ -47,10 +46,10 @@ public class AboutDialog extends JDialog {
         getRootPane().registerKeyboardAction(ActionListeners.dispose(this), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         okButton.addActionListener(ActionListeners.dispose(this));
-        sourceCodeButton.addActionListener(ActionListeners.openURL(this, "https://github.com/SKCraft/Launcher"));
+        sourceCodeButton.addActionListener(ActionListeners.openURL(this, "https://pavement.artivain.com"));
     }
 
-    public static void showAboutDialog(Window parent) {
+    public static void showAboutDialog(ConfigurationDialog parent) {
         AboutDialog dialog = new AboutDialog(parent);
         dialog.setVisible(true);
     }
