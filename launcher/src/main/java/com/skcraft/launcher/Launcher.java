@@ -155,6 +155,14 @@ public final class Launcher {
     }
 
     /**
+     * Get an offline login service.
+     * @return
+     */
+    public OfflineLoginService getOfflineLogin() {
+        return new OfflineLoginService(accounts.getClientId());
+    }
+
+    /**
      * Get the Yggdrasil login service.
      *
      * @return the Yggdrasil (legacy) login service
@@ -175,8 +183,10 @@ public final class Launcher {
     public LoginService getLoginService(UserType type) {
         if (type == UserType.MICROSOFT) {
             return getMicrosoftLogin();
-        } else {
+        } else if (type == UserType.MOJANG) {
             return getYggdrasil();
+        } else {
+            return getOfflineLogin();
         }
     }
 

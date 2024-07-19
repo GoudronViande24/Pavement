@@ -23,7 +23,8 @@ public class AccountSelectDialog extends JDialog {
 	private final JList<SavedSession> accountList;
 	private final JButton loginButton = new JButton(SharedLocale.tr("accounts.play"));
 	private final JButton cancelButton = new JButton(SharedLocale.tr("button.cancel"));
-	private final JButton addMojangButton = new JButton(SharedLocale.tr("accounts.addMojang"));
+    private final JButton addOfflineButton = new JButton(SharedLocale.tr("accounts.addOffline"));
+	// private final JButton addMojangButton = new JButton(SharedLocale.tr("accounts.addMojang"));
 	private final JButton addMicrosoftButton = new JButton(SharedLocale.tr("accounts.addMicrosoft"));
 	private final JButton removeSelected = new JButton(SharedLocale.tr("accounts.removeSelected"));
 	private final JButton offlineButton = new JButton(SharedLocale.tr("login.playOffline"));
@@ -73,10 +74,12 @@ public class AccountSelectDialog extends JDialog {
 
 		//Login Buttons
 		JPanel loginButtonsRow = new JPanel(new BorderLayout(0, 5));
-		addMojangButton.setAlignmentX(CENTER_ALIGNMENT);
+        addOfflineButton.setAlignmentX(CENTER_ALIGNMENT);
+		// addMojangButton.setAlignmentX(CENTER_ALIGNMENT);
 		addMicrosoftButton.setAlignmentX(CENTER_ALIGNMENT);
 		removeSelected.setAlignmentX(CENTER_ALIGNMENT);
-		loginButtonsRow.add(addMojangButton, BorderLayout.NORTH);
+        loginButtonsRow.add(addOfflineButton, BorderLayout.NORTH);
+		//loginButtonsRow.add(addMojangButton, BorderLayout.NORTH);
 		loginButtonsRow.add(addMicrosoftButton, BorderLayout.CENTER);
 		loginButtonsRow.add(removeSelected, BorderLayout.SOUTH);
 		loginButtonsRow.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
@@ -93,14 +96,23 @@ public class AccountSelectDialog extends JDialog {
 		loginButton.addActionListener(ev -> attemptExistingLogin(accountList.getSelectedValue()));
 		cancelButton.addActionListener(ev -> dispose());
 
-		addMojangButton.addActionListener(ev -> {
-			Session newSession = LoginDialog.showLoginRequest(this, launcher);
+        addOfflineButton.addActionListener(ev -> {
+            Session newSession = OfflineLoginDialog.showLoginRequest(this, launcher);
 
-			if (newSession != null) {
-				launcher.getAccounts().update(newSession.toSavedSession());
+            if (newSession != null) {
+                launcher.getAccounts().update(newSession.toSavedSession());
 				setResult(newSession);
-			}
-		});
+            }
+        });
+
+		// addMojangButton.addActionListener(ev -> {
+		// 	Session newSession = LoginDialog.showLoginRequest(this, launcher);
+
+		// 	if (newSession != null) {
+		// 		launcher.getAccounts().update(newSession.toSavedSession());
+		// 		setResult(newSession);
+		// 	}
+		// });
 
 		addMicrosoftButton.addActionListener(ev -> attemptMicrosoftLogin());
 
