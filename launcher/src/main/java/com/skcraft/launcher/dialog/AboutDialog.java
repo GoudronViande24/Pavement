@@ -30,7 +30,7 @@ public class AboutDialog extends JDialog {
         JPanel container = new JPanel();
         container.setLayout(new MigLayout("insets dialog"));
 
-        container.add(new JLabel("<html>Licensed under GNU General Public License, version 3."), "wrap, gapbottom unrel");
+        container.add(new JLabel("<html>Licensed under the GNU Lesser General Public License, version 3."), "wrap, gapbottom unrel");
         container.add(new JLabel("<html>You are using Pavement " + version + ", which is a fork of SKCraft Launcher, an open-source<br>" +
                 "customizable launcher platform that anyone can use."), "wrap, gapbottom unrel");
 
